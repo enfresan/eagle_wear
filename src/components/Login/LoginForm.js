@@ -51,11 +51,11 @@ const Login = (props) => {
                                 </Button>
                             </Col>
 
-                            <Col span={24}>
+                            {/* <Col span={24}>
                                 <Button style={{ width: "100%" }} className='button-login'>
                                     Crear cuenta
                                 </Button>
-                            </Col>
+                            </Col> */}
                         </Row>
                     </Form>
                 </Col>

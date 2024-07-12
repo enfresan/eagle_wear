@@ -44,22 +44,24 @@ const Bag = (props) => {
     { props.productSelected && 
         <Drawer className='form-login' title={props.productSelected.title} placement={'right'} width={900} onClose={() => props.onCloseDrawer(false)} open={props.drawerOpenBag}>
             <Row justify={'space-evenly'} gutter={[8,8]}>
-                <Col span={10}>
+                <Col xs={6} sm={8} md={10} lg={10} xl={10} xxl={10}>
                     <Flex justify='center' align='center' gap="middle" horizontal>
                         <Image className='img-wrapper' alt={props.productSelected.title} src={props.productSelected.image} />
                     </Flex>
                 </Col>
 
-                <Col span={14}>
+                <Col xs={18} sm={16} md={14} lg={14} xl={14} xxl={14}>
                     <Collapse size='small' bordered={false} defaultActiveKey={['2']}  items={[ {  key: '1', label: 'Descripción', children: <Typography.Paragraph> <Typography.Text>{props.productSelected.description}</Typography.Text>  <Divider /> <Typography.Text type="secondary" italic>Código del Producto: {props.productSelected.id}</Typography.Text> </Typography.Paragraph>,  }, 
                         {  key: '2', label: 'Agregar a mi bolsa', children: 
                             <Row justify={'space-between'}> 
                                 <Flex justify='space-evenly' align='center' gap="middle" horizontal>
-                                    <Typography.Text>Cantidad: </Typography.Text>
-                                    <InputNumber min={1} defaultValue={1} onChange={onChangeInputNum} />
-                                </Flex>
+                                    <Flex justify='space-evenly' align='center' gap="middle" horizontal>
+                                        <Typography.Text>No: </Typography.Text>
+                                        <InputNumber min={1} defaultValue={1} onChange={onChangeInputNum} />
+                                    </Flex>
 
-                                <Button type='primary' onClick={onAddBag}>Agregar</Button>
+                                    <Button type='primary' onClick={onAddBag}>Agregar</Button>
+                                </Flex>
                             </Row>,  }, ]}
                     />
                 </Col>

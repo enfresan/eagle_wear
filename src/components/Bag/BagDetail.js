@@ -39,20 +39,22 @@ const BagDetail = (props) => {
                     <List.Item
                         key={item.title}
                         actions={[
-                            <IconText icon={StarOutlined} text={item.rating.rate} key="list-vertical-star-o" />,
                             <Flex justify='space-evenly' align='center' gap="middle" horizontal>
-                                <Typography.Text>Cantidad: </Typography.Text>
-                                <InputNumber min={1} defaultValue={item.countBag} />
-                            </Flex>,
-                            <Popconfirm
-                                title="Borrar producto"
-                                description="¿Estás seguro que quieres borrar el artículo?"
-                                onConfirm={() => deleteItem(item.id)}
-                                okText="Sí"
-                                cancelText="No"
-                            >
-                                <Button disabled><DeleteOutlined/></Button>
-                            </Popconfirm>
+                                <IconText icon={StarOutlined} text={item.rating.rate} key="list-vertical-star-o" />,
+                                <Flex justify='space-evenly' align='center' gap="middle" horizontal>
+                                    <Typography.Text></Typography.Text>
+                                    <InputNumber min={1} defaultValue={item.countBag} />
+                                </Flex>,
+                                <Popconfirm
+                                    title="Borrar producto"
+                                    description="¿Estás seguro que quieres borrar el artículo?"
+                                    onConfirm={() => deleteItem(item.id)}
+                                    okText="Sí"
+                                    cancelText="No"
+                                >
+                                    <Button disabled><DeleteOutlined/></Button>
+                                </Popconfirm>
+                            </Flex>
                         ]}
                         extra={
                         <Image
