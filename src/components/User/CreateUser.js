@@ -106,7 +106,7 @@ const CreateUser = (props) => {
                         </Form.Item>
                     </Col> */}
 
-                    <Col span={24}>
+                    <Col span={12}>
                         <Button style={{ width: "100%" }} type="primary" htmlType='submit' loading={props.fetchingCreateUser} className='button-login'>
                             Crear
                         </Button>

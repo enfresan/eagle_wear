@@ -12,7 +12,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <Provider store={store}>
     <ConfigProvider locale={esES} theme={{
-          algorithm: theme.darkAlgorithm,
+          // algorithm: theme.darkAlgorithm,
           token: {
             colorPrimary: '#f5222d',
             colorInfo: "#f5222d",

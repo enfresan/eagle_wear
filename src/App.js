@@ -5,7 +5,7 @@ import reactLogo from './assets/images/react.svg'
 import spsLogo from './assets/images/SPSLogo.svg'
 import './styles/App.css'
 import logo from './assets/images/logo-vertical.svg'
-import {Layout, Row, Col, Button, Image, Affix, Typography} from 'antd'
+import {Layout, Row, Col, Button, Image, Affix, Typography, Flex} from 'antd'
 import { ShoppingOutlined, LoginOutlined } from '@ant-design/icons';
 
 import LoginForm from './components/Login/LoginForm';
@@ -60,15 +60,23 @@ const App = (props) => {
         </Content>
         <Footer style={{ textAlign: 'center'}} >
           <Row justify={'space-between'}>
-            Ant Design ©{new Date().getFullYear()} Created by me
-            <div className='footer-logos'>
-              <a href="https://spsolutions.com.mx/" target="_blank">
-                <img src={spsLogo} className="logo" alt="SPS logo" />
-              </a>
-              <a href="https://react.dev" target="_blank">
-                <img src={reactLogo} className="logo react" alt="React logo" />
-              </a>
-            </div>
+            <Col xs={24} sm={24} md={6} lg={6} xl={6} xxl={6}>
+              <Flex justify='space-evenly' align='center' gap="middle" horizontal>
+                <Typography.Text style={{paddingBottom:'1em'}}>Ant Design ©{new Date().getFullYear()} Created by me</Typography.Text>
+              </Flex>
+            </Col>
+            <Col xs={24} sm={24} md={6} lg={6} xl={6} xxl={6}>
+              <Flex justify='space-evenly' align='center' gap="middle" horizontal>
+                <div className='footer-logos'>
+                  <a href="https://spsolutions.com.mx/" target="_blank">
+                    <img src={spsLogo} className="logo" alt="SPS logo" />
+                  </a>
+                  <a href="https://react.dev" target="_blank">
+                    <img src={reactLogo} className="logo react" alt="React logo" />
+                  </a>
+                </div>
+              </Flex>
+            </Col>
           </Row>
         </Footer>
       </Layout>

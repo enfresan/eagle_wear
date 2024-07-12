@@ -24,9 +24,8 @@ const Content = (props) => {
     const onChangeSort = (order) => { props.onGetAllProducts(pageSize, order); setSort(order); };
 
     return (<>
-        <Row gutter={[8,8]} justify={'space-evenly'} style={{ background: colorBgContainer, borderRadius: borderRadiusLG, padding:'1em'}}>
+        <Row className='select-category' gutter={[8,8]} justify={'space-evenly'} style={{ borderRadius: borderRadiusLG, padding:'1em',}}>
             <Col xs={0} sm={0}  md={14} lg={16} xl={16} xxl={16}/>
-
             <Col span={24}>
                 <Row justify={'space-evenly'} gutter={[8,8]}>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} className={category === "men's clothing" ? 'segment-category-selected' : 'segment-category'} onClick={() => onCategorySelected("men's clothing")}>
@@ -47,9 +46,9 @@ const Content = (props) => {
                 </Row>
             </Col>
         </Row>
-    <br />
+        <br />
     
-    <Row className='content-container' gutter={[8,8]} justify={'end'} style={{ background: colorBgContainer, borderRadius: borderRadiusLG, }}>
+        <Row className='content-container' gutter={[8,8]} justify={'end'} style={{ background: colorBgContainer, borderRadius: borderRadiusLG, }}>
 
             <Col xs={12} sm={12} md={4} lg={4} xl={3} xxl={3}>
                 <Segmented
