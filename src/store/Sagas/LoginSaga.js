@@ -2,10 +2,9 @@
 
 import { takeLatest, call, put } from 'redux-saga/effects';
 import * as loginActions from '../Actions/LoginActions';
-import { loginCall } from '../../services/LoginServices';
+import { loginCall, newUserCall } from '../../services/LoginServices';
 import { message } from 'antd';
 
-//********************** LOGIN *****************************
 function* getLogin(action) {
     try {
         console.log(action);
@@ -17,6 +16,7 @@ function* getLogin(action) {
             message.success('Bienvenido ' + action.loginInfo.userName);
             let token = response.data.token;
             console.log(token);
+            sessionStorage.setItem('token', token);
             yield put({ type: loginActions.LOGIN_API_CALL_SUCCESS,  usuario: action.loginInfo.userName, tokenLogin: token });             
         } else {
             let errorMensaje = response;
@@ -31,4 +31,51 @@ function* getLogin(action) {
 }
 export function* getLoginSaga() {
     yield takeLatest(loginActions.LOGIN_API_CALL_REQUEST, getLogin);
+}
+
+function* newUser(action) {
+    try {
+        console.log(action);
+        const token = sessionStorage.getItem('token');
+
+        const data = {
+            email: action.form.email,
+            username:action.form.username,
+            password:action.form.password,
+            name:{
+                firstname: action.form.firstname,
+                lastname: action.form.lastname
+            },
+            address:{
+                city: action.form.city,
+                street: action.form.street,
+                number: action.form.number,
+                zipcode: action.form.zipcode,
+                geolocation:{
+                    lat: action.form.lat,
+                    long:action.form.long
+                }
+            },
+            phone: action.form.phone
+        };
+
+        const response = yield call(newUserCall, token, data);
+        console.log('response :>> ', response);
+        if (response.status === 200) {
+            message.success('Usuario creado con exito. ID: ' + response.data.id);
+
+            yield put({ type: loginActions.CREATE_USER_SUCCESS });
+            yield put({ type: loginActions.DRAWER_CREATE_USER, drawerCreateUserOpen: false, });
+            yield put({ type: loginActions.CLEAN_FORM, cleanForm: 'crear-usuario', });
+        } else {
+            let errorMensaje = response;
+            message.error(errorMensaje)
+            yield put({ type: loginActions.CREATE_USER_FAILURE });
+        }
+    } catch (error) {
+        yield put({ type: loginActions.CREATE_USER_FAILURE });
+    }
+}
+export function* nuevoTipoDeSolicitudSaga() {
+    yield takeLatest(loginActions.CREATE_USER_REQUEST, newUser);
 }

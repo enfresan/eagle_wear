@@ -40,11 +40,11 @@ const BagDetail = (props) => {
                         key={item.title}
                         actions={[
                             <Flex justify='space-evenly' align='center' gap="middle" horizontal>
-                                <IconText icon={StarOutlined} text={item.rating.rate} key="list-vertical-star-o" />,
+                                <IconText icon={StarOutlined} text={item.rating.rate} key="list-vertical-star-o" />
                                 <Flex justify='space-evenly' align='center' gap="middle" horizontal>
                                     <Typography.Text></Typography.Text>
                                     <InputNumber min={1} defaultValue={item.countBag} />
-                                </Flex>,
+                                </Flex>
                                 <Popconfirm
                                     title="Borrar producto"
                                     description="¿Estás seguro que quieres borrar el artículo?"

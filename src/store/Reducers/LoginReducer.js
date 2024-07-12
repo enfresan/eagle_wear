@@ -1,6 +1,7 @@
 import * as loginActions from '../Actions/LoginActions';
 
 const initialState = {
+    cleanForm: null,
     fetchingLogin: false,
     tokenLogin: null,
     errorLogin: false,
@@ -8,7 +9,10 @@ const initialState = {
     usuario: sessionStorage.getItem('userInfo'),
     isAuthenticated: false,
 
-    drawerOpen: false
+    drawerOpen: false,
+    drawerCreateUserOpen: false,
+
+    fetchingCreateUser: false,
 };
 
 export default (state = initialState, action) => {
@@ -22,6 +26,19 @@ export default (state = initialState, action) => {
 
         case loginActions.DRAWER_LOGIN: 
             return { ...state, drawerOpen: action.drawerOpen }
+        
+        case loginActions.DRAWER_CREATE_USER: 
+            return { ...state, drawerCreateUserOpen: action.drawerCreateUserOpen }
+
+        case loginActions.CLEAN_FORM:
+            return { ...state, cleanForm: action.cleanForm };
+
+        case loginActions.CREATE_USER_REQUEST:
+            return { ...state, fetchingCreateUser: true, };
+        case loginActions.CREATE_USER_SUCCESS:
+            return { ...state, fetchingCreateUser: false, };
+        case loginActions.CREATE_USER_FAILURE:
+            return { ...state, fetchingCreateUser: false, };
 
         default:
             return state;

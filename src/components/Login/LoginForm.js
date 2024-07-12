@@ -4,6 +4,7 @@ import '../../styles/Login.css';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import logoEagle from '../../assets/images/logo.svg';
+import CreateUser from '../User/CreateUser';
 
 const layout = {
     labelCol: { span: 24 },
@@ -21,7 +22,7 @@ const Login = (props) => {
     return (
         <Drawer className='form-login' title='Ingresar' placement={'right'} width={600} onClose={() => props.onCloseDrawer(false)} open={props.drawerOpen}>
             <Row justify={'space-evenly'}>
-                <Col span={24}>
+                <Col span={24} style={{paddingTop:'5em'}}>
                     <Flex justify='center' align='center' gap="middle" horizontal>
                         <Image preview={false} src={logoEagle} />
                     </Flex>
@@ -51,15 +52,16 @@ const Login = (props) => {
                                 </Button>
                             </Col>
 
-                            {/* <Col span={24}>
-                                <Button style={{ width: "100%" }} className='button-login'>
+                            <Col span={24}>
+                                <Button style={{ width: "100%" }} onClick={() => props.onOpenCreateDrawer()} className='button-login'>
                                     Crear cuenta
                                 </Button>
-                            </Col> */}
+                            </Col>
                         </Row>
                     </Form>
                 </Col>
             </Row>
+            <CreateUser />
         </Drawer>
     );
 }
@@ -83,6 +85,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onCloseDrawer: () => {
             dispatch({ type: 'DRAWER_LOGIN', drawerOpen: false });
+        },
+        onOpenCreateDrawer: () => {
+            dispatch({ type: 'DRAWER_CREATE_USER', drawerCreateUserOpen: true });
         },
     };
 };
