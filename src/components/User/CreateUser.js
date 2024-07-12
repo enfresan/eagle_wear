@@ -1,14 +1,11 @@
 import React, { useState } from 'react';
-import { Form, Input, Row, Col, Drawer, Divider } from 'antd';
+import { Form, Input, Row, Col, Drawer, Divider, Button } from 'antd';
 import '../../styles/Login.css';
 import { LockOutlined, NumberOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { City, CityOne, EditName, Mail, MapDraw, PhoneCall, UserBusiness, Zip } from '@icon-park/react';
 
-const layout = {
-    labelCol: { span: 24 },
-    wrapperCol: { span: 24 },
-};
+const layout = { labelCol: { span: 24 }, wrapperCol: { span: 24 }, };
 
 const CreateUser = (props) => {
     const [form] = Form.useForm();
@@ -110,7 +107,7 @@ const CreateUser = (props) => {
                     </Col> */}
 
                     <Col span={24}>
-                        <Button disabled={validatePassBool} style={{ width: "100%" }} type="primary" htmlType='submit' loading={props.fetchingCreateUser} className='button-login'>
+                        <Button style={{ width: "100%" }} type="primary" htmlType='submit' loading={props.fetchingCreateUser} className='button-login'>
                             Crear
                         </Button>
                     </Col>

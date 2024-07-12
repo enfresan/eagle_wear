@@ -17,6 +17,7 @@ function* getLogin(action) {
             let token = response.data.token;
             console.log(token);
             sessionStorage.setItem('token', token);
+            sessionStorage.setItem('user', action.loginInfo.userName);
             yield put({ type: loginActions.LOGIN_API_CALL_SUCCESS,  usuario: action.loginInfo.userName, tokenLogin: token });             
         } else {
             let errorMensaje = response;

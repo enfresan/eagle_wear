@@ -6,7 +6,7 @@ const initialState = {
     tokenLogin: null,
     errorLogin: false,
     errorMensaje: null,
-    usuario: sessionStorage.getItem('userInfo'),
+    usuario: sessionStorage.getItem('user'),
     isAuthenticated: false,
 
     drawerOpen: false,
