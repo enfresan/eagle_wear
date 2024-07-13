@@ -61,10 +61,10 @@ const Bag = (props) => {
                 <Col xs={18} sm={16} md={14} lg={14} xl={14} xxl={14}>
                     <Collapse className='collapse-detail' size='small' bordered={false} defaultActiveKey={['2']}  items={[ {  key: '1', label: 'Descripción', children: <Typography.Paragraph> <Typography.Text>{props.productSelected.description}</Typography.Text>  <Divider /> <Typography.Text type="secondary" italic>Código del Producto: {props.productSelected.id}</Typography.Text> </Typography.Paragraph>,  }, 
                         {  key: '2', label: 'Agregar a mi bolsa', children: 
-                            <Row justify={'space-between'}> 
+                            <Flex justify='space-between' align='center' gap="middle" horizontal>
                                 <Col>
                                     <Flex justify='space-evenly' align='center' gap="middle" horizontal>
-                                        <Typography.Text>No: </Typography.Text>
+                                        <Typography.Text># </Typography.Text>
                                         <InputNumber min={1} defaultValue={count} onChange={(num) => setCount(num)} />
                                     </Flex>
                                 </Col>
@@ -72,7 +72,7 @@ const Bag = (props) => {
                                 <Col>
                                     <Button type='primary' onClick={onAddBag}>Agregar</Button>
                                 </Col>
-                            </Row>,  }, ]}
+                            </Flex>,  }, ]}
                     />
                 </Col>
 
