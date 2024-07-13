@@ -14,7 +14,7 @@ root.render(
     <ConfigProvider locale={esES} theme={{
           // algorithm: theme.darkAlgorithm,
           token: {
-            colorPrimary: '#f5222d',
+            colorPrimary: '#af000e',
             colorInfo: "#f5222d",
             borderRadius: 16,
           },

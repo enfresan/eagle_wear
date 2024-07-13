@@ -10,24 +10,46 @@ function* allProductsList(action) {
         const sort = action.limit ? action.sort ? "&sort=" + action.sort : "" : action.sort ? "?sort=" + action.sort : "";
 
         const response = yield call(getListAllProductsCall, limit, sort);
-        console.log('response', response);
+        console.log(response);
         if (response.status === 200) {
             const allProductsList = response.data;
             const countAllProducts = response.data.length;
-            const allProductsBagList = response.data;
 
-            allProductsBagList.forEach(product => { product.countBag = 0;  });
-
-            yield put({ type: productsActions.GET_ALL_PRODUCTS_SUCCESS, allProductsList, countAllProducts, allProductsBagList });
+            yield put({ type: productsActions.GET_ALL_PRODUCTS_SUCCESS, allProductsList, countAllProducts });
         } else {
             yield put({ type: productsActions.GET_ALL_PRODUCTS_FAILURE });
         }
     } catch (error) {
         yield put({ type: productsActions.GET_ALL_PRODUCTS_FAILURE });
     }
-}
-export function* allProductsListSaga() {
+}export function* allProductsListSaga() {
     yield takeLatest(productsActions.GET_ALL_PRODUCTS_REQUEST, allProductsList);
+}
+
+function* allProductsListBagList(action) {
+    try {
+        console.log(action);
+        //const token = sessionStorage.getItem('token');
+        const limit = "";
+        const sort = "";
+
+        const response = yield call(getListAllProductsCall, limit, sort);
+        console.log(response);
+        if (response.status === 200) {
+            const allProductsBagList = response.data;
+
+            allProductsBagList.forEach(product => { product.countBag = 0;  });
+
+            yield put({ type: productsActions.GET_INITIAL_ALL_PRODUCTS_SUCCESS, allProductsBagList });
+        } else {
+            yield put({ type: productsActions.GET_INITIAL_ALL_PRODUCTS_FAILURE });
+        }
+    } catch (error) {
+        yield put({ type: productsActions.GET_INITIAL_ALL_PRODUCTS_FAILURE });
+    }
+}
+export function* allProductsListBagListBag() {
+    yield takeLatest(productsActions.GET_INITIAL_ALL_PRODUCTS_REQUEST, allProductsListBagList);
 }
 
 function* productListByCategory(action) {
@@ -36,7 +58,7 @@ function* productListByCategory(action) {
         //const token = sessionStorage.getItem('token');
 
         const response = yield call(productListByCategoryCall, action.category);
-        console.log('response', response);
+        console.log(response);
         if (response.status === 200) {
             let allProductsList = response.data;
             const countAllProducts = response.data.length;

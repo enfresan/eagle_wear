@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 
 const Bag = (props) => {
     const [messageApi, contextHolder] = message.useMessage();
-    const [count, setCount] = useState(1);
+    const [count, setCount] = useState(0);
+    const [totalItems, setTotalItemas] = useState(props.totalItems ? props.totalItems : 0);
 
     const success = () => {
         messageApi.open({
@@ -19,30 +20,37 @@ const Bag = (props) => {
           type: 'info',
           content: 'Es necesario añadir al menos un producto para agregarlo a la bolsa',
         });
-      };
-
-    const onChangeInputNum = (value) => { setCount(value); };
+    };
 
     const onAddBag = () => {
         let listLocal = props.allProductsBagList;
+        let totalItemsLocal = totalItems;
         listLocal.forEach(product => {
             if(product.id === props.productSelected.id){
                 if(count > 0){
                     product.countBag += count;
                     success();
+                    totalItemsLocal += count;
                 } else {
                     info();
                 }
             }
         });
 
+        setTotalItemas(totalItemsLocal);
+        props.onUpdateItems(totalItemsLocal);
         props.onUpdateListBag(listLocal);
+    };
+
+    const onCloseDrawer = () => {
+        props.onCloseDrawer(false);
+        setCount(0);
     };
 
     return (<>
     {contextHolder}
     { props.productSelected && 
-        <Drawer className='form-login' title={props.productSelected.title} placement={'right'} width={900} onClose={() => props.onCloseDrawer(false)} open={props.drawerOpenBag}>
+        <Drawer className='form-login' title={props.productSelected.title} placement={'right'} width={900} onClose={onCloseDrawer} open={props.drawerOpenBag}>
             <Row justify={'space-evenly'} gutter={[8,8]}>
                 <Col xs={6} sm={8} md={10} lg={10} xl={10} xxl={10}>
                     <Flex justify='center' align='center' gap="middle" horizontal>
@@ -51,17 +59,19 @@ const Bag = (props) => {
                 </Col>
 
                 <Col xs={18} sm={16} md={14} lg={14} xl={14} xxl={14}>
-                    <Collapse size='small' bordered={false} defaultActiveKey={['2']}  items={[ {  key: '1', label: 'Descripción', children: <Typography.Paragraph> <Typography.Text>{props.productSelected.description}</Typography.Text>  <Divider /> <Typography.Text type="secondary" italic>Código del Producto: {props.productSelected.id}</Typography.Text> </Typography.Paragraph>,  }, 
+                    <Collapse className='collapse-detail' size='small' bordered={false} defaultActiveKey={['2']}  items={[ {  key: '1', label: 'Descripción', children: <Typography.Paragraph> <Typography.Text>{props.productSelected.description}</Typography.Text>  <Divider /> <Typography.Text type="secondary" italic>Código del Producto: {props.productSelected.id}</Typography.Text> </Typography.Paragraph>,  }, 
                         {  key: '2', label: 'Agregar a mi bolsa', children: 
                             <Row justify={'space-between'}> 
-                                <Flex justify='space-evenly' align='center' gap="middle" horizontal>
+                                <Col>
                                     <Flex justify='space-evenly' align='center' gap="middle" horizontal>
                                         <Typography.Text>No: </Typography.Text>
-                                        <InputNumber min={1} defaultValue={1} onChange={onChangeInputNum} />
+                                        <InputNumber min={1} defaultValue={count} onChange={(num) => setCount(num)} />
                                     </Flex>
+                                </Col>
 
+                                <Col>
                                     <Button type='primary' onClick={onAddBag}>Agregar</Button>
-                                </Flex>
+                                </Col>
                             </Row>,  }, ]}
                     />
                 </Col>
@@ -86,7 +96,7 @@ const mapStateToProps = (state) => {
     return {
         productSelected: state.ProductsReducer.productSelected,
         drawerOpenBag: state.ProductsReducer.drawerOpenBag,
-        allProductsBagList: state.ProductsReducer.allProductsBagList
+        allProductsBagList: state.ProductsReducer.allProductsBagList,
     };
 };
 
@@ -97,6 +107,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         onUpdateListBag: (allProductsBagList) => {
             dispatch({ type: 'UPDATE_BAG_PRODUCTS', allProductsBagList });
+        },
+        onUpdateItems: (totalItems) => {
+            dispatch({ type: 'TOTAL_ITEMS', totalItems });
         }
     };
 };

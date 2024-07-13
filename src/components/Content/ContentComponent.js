@@ -19,7 +19,10 @@ const Content = (props) => {
 
     const onShowSizeChange = (current, pageSizeLocal) => { setPageSize(pageSizeLocal);  setPage(current); props.onGetAllProducts(pageSizeLocal, sort); setCategory(undefined) };
 
-    const onCategorySelected = (value) =>  { if(value) { props.onGetProductosByCategory(value); setCategory(value); setSort('asc') } else { props.onGetAllProducts(pageSize, sort); setCategory(undefined) } };
+    const onCategorySelected = (value) =>  { 
+        if(value) { props.onGetProductosByCategory(value); setCategory(value); setSort('asc') } 
+        else { props.onGetAllProducts(pageSize, sort); setCategory(undefined) } 
+    };
 
     const onChangeSort = (order) => { props.onGetAllProducts(pageSize, order); setSort(order); };
 
@@ -29,19 +32,19 @@ const Content = (props) => {
             <Col span={24}>
                 <Row justify={'space-evenly'} gutter={[8,8]}>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} className={category === "men's clothing" ? 'segment-category-selected' : 'segment-category'} onClick={() => onCategorySelected("men's clothing")}>
-                        <Avatar className='bounce-in-top' size="large" style={{ backgroundColor: 'red',  }} icon={<ClothesSuit />}  /> <Divider/>  <Typography.Title level={5} style={{paddingTop:'1em'}}>Ropa para hombre</Typography.Title>
+                        <Avatar className='bounce-in-top' size="large" style={{ backgroundColor: '#af000e',  }} icon={<ClothesSuit />}  /> <Divider/>  <Typography.Title level={5} style={{paddingTop:'1em'}}>Ropa para hombre</Typography.Title>
                     </Col>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} onClick={() => onCategorySelected("jewelery")} className={category === "jewelery" ? 'segment-category-selected' : 'segment-category '}>
-                        <Avatar className='bounce-in-top-1' size="large" style={{ backgroundColor: 'red',  }} icon={<DiamondRing />}  /> <Divider/>  <Typography.Title level={5}  style={{paddingTop:'1em'}}>Joyería</Typography.Title >
+                        <Avatar className='bounce-in-top-1' size="large" style={{ backgroundColor: '#af000e',  }} icon={<DiamondRing />}  /> <Divider/>  <Typography.Title level={5}  style={{paddingTop:'1em'}}>Joyería</Typography.Title >
                     </Col>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} className={category === "electronics" ? 'segment-category-selected' : 'segment-category '} onClick={() => onCategorySelected("electronics")}>
-                        <Avatar className='bounce-in-top-2' size="large" style={{ backgroundColor: 'red',  }} icon={<PlugOne />} /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Electrónica</Typography.Title >
+                        <Avatar className='bounce-in-top-2' size="large" style={{ backgroundColor: '#af000e',  }} icon={<PlugOne />} /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Electrónica</Typography.Title >
                     </Col>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} className={category === "women's clothing" ? 'segment-category-selected' : 'segment-category'} onClick={() => onCategorySelected("women's clothing")}>
-                        <Avatar className='bounce-in-top-3' size="large" style={{ backgroundColor: 'red',  }} icon={<FullDressLonguette />}  /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Ropa para mujer</Typography.Title >
+                        <Avatar className='bounce-in-top-3' size="large" style={{ backgroundColor: '#af000e',  }} icon={<FullDressLonguette />}  /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Ropa para mujer</Typography.Title >
                     </Col>
                     <Col xs={7} sm={4}  md={4} lg={4} xl={4} xxl={4} className={category === undefined ? 'segment-category-selected' : 'segment-category '} onClick={() => onCategorySelected(undefined)}>
-                        <Avatar className='bounce-in-top-4' size="large" style={{ backgroundColor: 'red',  }} icon={<AllApplication />}  /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Mostrar todas</Typography.Title >
+                        <Avatar className='bounce-in-top-4' size="large" style={{ backgroundColor: '#af000e',  }} icon={<AllApplication />}  /> <Divider/> <Typography.Title level={5}  style={{paddingTop:'1em'}}>Mostrar todas</Typography.Title >
                     </Col>
                 </Row>
             </Col>
@@ -69,7 +72,7 @@ const Content = (props) => {
                             <Badge.Ribbon text={'$ ' + parseFloat(product.price).toFixed(2)}>
                                 <Card
                                     className='card-content'
-                                    cover={ <Image preview={false} style={{height:300, width: 250}} className='image-products' alt={product.title} src={product.image} />  }
+                                    cover={ <Flex justify='space-evenly' align='center' gap="middle" horizontal><Image preview={false} style={{height:300, width: 250}} className='image-products' alt={product.title} src={product.image} />  </Flex>}
                                     actions={[
                                         <Flex justify='space-evenly' align='center' gap="middle" horizontal>
                                             <Rate disabled allowHalf defaultValue={product.rating.rate} style={{fontSize:12}}/> 

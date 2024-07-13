@@ -40,6 +40,13 @@ export default (state = initialState, action) => {
         case loginActions.CREATE_USER_FAILURE:
             return { ...state, fetchingCreateUser: false, };
 
+        case loginActions.LOG_OUT_REQUEST:
+            return { ...state, fetchingLogout: true };
+        case loginActions.LOG_OUT_SUCCESS:
+            return { ...state, fetchingLogout: false, isAuthenticated: false, };
+        case loginActions.LOG_OUT_FAILURE:
+            return { ...state, fetchingLogout: false };
+
         default:
             return state;
     }

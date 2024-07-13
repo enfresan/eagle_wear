@@ -18,7 +18,9 @@ function* getLogin(action) {
             console.log(token);
             sessionStorage.setItem('token', token);
             sessionStorage.setItem('user', action.loginInfo.userName);
-            yield put({ type: loginActions.LOGIN_API_CALL_SUCCESS,  usuario: action.loginInfo.userName, tokenLogin: token });             
+
+            yield put({ type: loginActions.LOGIN_API_CALL_SUCCESS,  usuario: action.loginInfo.userName, tokenLogin: token });
+            yield put({ type: loginActions.DRAWER_LOGIN, drawerOpen: false });         
         } else {
             let errorMensaje = response;
             message.error(errorMensaje)
@@ -61,7 +63,7 @@ function* newUser(action) {
         };
 
         const response = yield call(newUserCall, token, data);
-        console.log('response :>> ', response);
+        console.log(response);
         if (response.status === 200) {
             message.success('Usuario creado con exito. ID: ' + response.data.id);
 
@@ -76,7 +78,21 @@ function* newUser(action) {
     } catch (error) {
         yield put({ type: loginActions.CREATE_USER_FAILURE });
     }
-}
-export function* nuevoTipoDeSolicitudSaga() {
+} export function* nuevoTipoDeSolicitudSaga() {
     yield takeLatest(loginActions.CREATE_USER_REQUEST, newUser);
+}
+
+function* logoutSession(action) {
+    try {
+        console.log(action);
+        
+        yield put({ type: loginActions.LOG_OUT_SUCCESS });
+        sessionStorage.clear();
+    } catch (error) {
+        yield put({ type: loginActions.LOG_OUT_FAILURE });
+        sessionStorage.clear();
+        window.location.reload();
+    }
+} export function* logoutSessionSaga() {
+    yield takeLatest(loginActions.LOG_OUT_REQUEST, logoutSession);
 }

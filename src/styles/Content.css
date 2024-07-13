@@ -20,6 +20,7 @@
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.122);
     backdrop-filter: blur(9.1px);
     -webkit-backdrop-filter: blur(9.1px);
+    transition: all 0.2s ease-in-out;
 }
 
 .segment-category:hover{
@@ -28,16 +29,18 @@
 
 .segment-category-selected{
     padding: 2em;
-    background: rgba(255, 225, 225, 0.438);
+    background: rgba(0, 0, 0, 0.091);
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.35);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(9.1px);
     -webkit-backdrop-filter: blur(9.1px);
+    transition: all 0.2s ease-in-out;
 }
 
 .select-category{
     /* background-image: url("https://img.freepik.com/free-vector/abstract-background-with-squares_23-2148995948.jpg?t=st=1720819991~exp=1720820591~hmac=b0372674c54e4e930ae4be20f926a0ed20e94dbfd963a83f6af7055097fdfe00"); */
     background-image: url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_361591-4356.jpg?w=740&t=st=1720820083~exp=1720820683~hmac=1211c45b7d2920fca5cfefd09f57b1c150194eeec4b27381ce0194840abe8563");
+    /* background-image: url("https://img.freepik.com/free-vector/realistic-polygonal-background_23-2148901867.jpg?w=2000&t=st=1720834134~exp=1720834734~hmac=2706e52fd38e18d9e2eb9977dd7f1310819ec8cab0070115d3d223535ccb123a"); */
     background-color: white;
 }
 

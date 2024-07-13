@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Input, Row, Col, Drawer, Divider, Button } from 'antd';
-import '../../styles/Login.css';
 import { LockOutlined, NumberOutlined } from '@ant-design/icons';
 import { connect } from 'react-redux';
 import { City, CityOne, EditName, Mail, MapDraw, PhoneCall, UserBusiness, Zip } from '@icon-park/react';
@@ -19,7 +18,7 @@ const CreateUser = (props) => {
     }
 
     return (
-        <Drawer className='form-login' title='Crear Usuario' placement={'right'} width={600} onClose={() => props.onCloseCreateDrawer()} open={props.drawerCreateUserOpen}>
+        <Drawer title='Crear Usuario' placement={'right'} width={600} onClose={() => props.onCloseCreateDrawer()} open={props.drawerCreateUserOpen} style={{ backgroundImage: 'url("https://img.freepik.com/free-vector/elegant-white-background-with-shiny-lines_361591-4356.jpg?w=740&t=st=1720820083~exp=1720820683~hmac=1211c45b7d2920fca5cfefd09f57b1c150194eeec4b27381ce0194840abe8563")' }}>
             <Form {...layout} form={form} initialValues={{ remember: true }} onFinish={onFinish}>
                 <Row justify="space-evenly" gutter={[8, 8]}>
                     <Divider orientation='left'>Datos Generales</Divider>
@@ -107,7 +106,7 @@ const CreateUser = (props) => {
                     </Col> */}
 
                     <Col span={12}>
-                        <Button style={{ width: "100%" }} type="primary" htmlType='submit' loading={props.fetchingCreateUser} className='button-login'>
+                        <Button style={{ width: "100%" }} type="primary" htmlType='submit' loading={props.fetchingCreateUser}>
                             Crear
                         </Button>
                     </Col>
